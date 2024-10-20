@@ -20,6 +20,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=Game+of+thrones&apikey=66d123fa");
 		System.out.println(json);
 		ConvierteDatos conversor = new ConvierteDatos();
-		var datos = conversor.obtenerDatos(json, DatosSerie.class);
+		DatosSerie datos = conversor.obtenerDatos(json, DatosSerie.class);
+		System.out.println(datos);
 	}
 }
