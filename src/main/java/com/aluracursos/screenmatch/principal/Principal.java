@@ -7,6 +7,7 @@ import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,12 +38,21 @@ public class Principal {
         // temporadas.forEach(System.out::println); // Muestra los datos de cada temporada
 
         // Mostrar el número de temporada, número de episodios y lista de episodios enumerada.
-        for (int i = 0; i < datos.totalDeTemporadas(); i++) { // Itera sobre cada temporada
-            List<DatosEpisodio> episodiosTemporada = temporadas.get(i).episodios(); // Obtiene la lista de episodios para la temporada actual
-            int numeroTemporada = i + 1; // Se asume que las temporadas comienzan en 1
-            System.out.println("Temporada " + numeroTemporada + ": " + episodiosTemporada.size() + " episodios"); // Muestra el número de temporada y episodios
-            for (int j = 0; j < episodiosTemporada.size(); j++) { // Itera sobre cada episodio de la temporada
-                System.out.println((j + 1) + ". " + episodiosTemporada.get(j).titulo()); // Muestra el título del episodio enumerado
-            }
-        }
+//        for (int i = 0; i < datos.totalDeTemporadas(); i++) { // Itera sobre cada temporada
+//            List<DatosEpisodio> episodiosTemporada = temporadas.get(i).episodios(); // Obtiene la lista de episodios para la temporada actual
+//            int numeroTemporada = i + 1; // Se asume que las temporadas comienzan en 1
+//            System.out.println("Temporada " + numeroTemporada + ": " + episodiosTemporada.size() + " episodios"); // Muestra el número de temporada y episodios
+//            for (int j = 0; j < episodiosTemporada.size(); j++) { // Itera sobre cada episodio de la temporada
+//                System.out.println((j + 1) + ". " + episodiosTemporada.get(j).titulo()); // Muestra el título del episodio enumerado
+//            }
+//        }
+//        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+        IntStream.range(0, temporadas.size()).forEach(i -> {
+            var episodiosTemporada = temporadas.get(i).episodios();
+            System.out.println("Temporada " + (i + 1) + ": " + episodiosTemporada.size() + " episodios");
+            IntStream.range(0, episodiosTemporada.size()).forEach(j ->
+                    System.out.println((j + 1) + ". " + episodiosTemporada.get(j).titulo())
+            );
+        });
     }}
