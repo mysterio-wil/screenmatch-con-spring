@@ -6,10 +6,9 @@ import com.aluracursos.screenmatch.model.DatosTemporadas;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.List;
-import java.util.Scanner;
 
 public class Principal {
     private Scanner teclado = new Scanner(System.in);
@@ -30,8 +29,8 @@ public class Principal {
 
         // Busca los datos de todas las temporadas
         List<DatosTemporadas> temporadas = new ArrayList<>(); // Lista para almacenar los datos de temporadas
-        for (int i = 1; i <= datos.totalDeTemporadas() ; i++) { // Itera por cada temporada
-            json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+" ) + "&Season=" + i + API_KEY); // Llama a la API para la temporada
+        for (int i = 1; i <= datos.totalDeTemporadas(); i++) { // Itera por cada temporada
+            json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + "&Season=" + i + API_KEY); // Llama a la API para la temporada
             var datosTemporadas = conversor.obtenerDatos(json, DatosTemporadas.class); // Convierte los datos JSON a objeto DatosTemporadas
             temporadas.add(datosTemporadas); // Agrega los datos de la temporada a la lista
         }
@@ -55,4 +54,10 @@ public class Principal {
                     System.out.println((j + 1) + ". " + episodiosTemporada.get(j).titulo())
             );
         });
-    }}
+
+        // Convertir todas las informaciones a una lista del tipo DatosEpisodio
+        List<DatosEpisodio> datosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())  // Aplana la lista de episodios de todas las temporadas
+                .collect(Collectors.toList());         // Recolecta todos los episodios en una lista
+    }
+}
