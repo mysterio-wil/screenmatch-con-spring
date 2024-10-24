@@ -16,10 +16,10 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// Crea una instancia de la clase Principal, que maneja la lógica de búsqueda de series
-//		Principal principal = new Principal();
-//		// Llama al método muestraElMenu para iniciar la interacción con el usuario
-//		principal.muestraElMenu();
-		EjemploStreams ejemploStreams = new EjemploStreams();
-		ejemploStreams.muestraEjemplo();
+		Principal principal = new Principal();
+		// Llama al método muestraElMenu para iniciar la interacción con el usuario
+		principal.muestraElMenu();
+//		EjemploStreams ejemploStreams = new EjemploStreams();
+//		ejemploStreams.muestraEjemplo();
 	}
 }
