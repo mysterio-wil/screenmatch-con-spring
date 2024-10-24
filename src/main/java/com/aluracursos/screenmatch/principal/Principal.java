@@ -59,5 +59,13 @@ public class Principal {
         List<DatosEpisodio> datosEpisodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream())  // Aplana la lista de episodios de todas las temporadas
                 .collect(Collectors.toList());         // Recolecta todos los episodios en una lista
+
+        // Top 5 episodios
+        System.out.println("Top 5 episodios");
+        datosEpisodios.stream()
+                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))  // Filtra episodios sin evaluación
+                .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed()) // Ordena los episodios de mayor a menor
+                .limit(5)  // Limita el resultado a los 5 episodios mejor evaluados
+                .forEach(System.out::println);  // Imprime los episodios en la consola
     }
 }
