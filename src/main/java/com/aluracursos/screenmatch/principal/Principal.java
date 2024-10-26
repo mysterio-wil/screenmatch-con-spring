@@ -64,13 +64,17 @@ public class Principal {
                 .flatMap(t -> t.episodios().stream())  // Aplana la lista de episodios de todas las temporadas
                 .collect(Collectors.toList());         // Recolecta todos los episodios en una lista
 
-        // Top 5 episodios
+        // Muestra el Top 5 de episodios mejor evaluados
         System.out.println("Top 5 episodios");
         datosEpisodios.stream()
-                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))  // Filtra episodios sin evaluación
-                .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed()) // Ordena los episodios de mayor a menor
-                .limit(5)  // Limita el resultado a los 5 episodios mejor evaluados
-                .forEach(System.out::println);  // Imprime los episodios en la consola
+                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A")) // Filtrar episodios que tengan evaluación disponible
+                .peek(e -> System.out.println("Primer filtro (excluyendo N/A): " + e)) // Mostrar cada episodio después del primer filtro
+                .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed()) // Ordenar los episodios por evaluación de mayor a menor
+                .peek(e -> System.out.println("Después de ordenar (mayor a menor): " + e)) // Mostrar cada episodio después de ordenar
+                .map(e -> e.titulo().toUpperCase()) // Convertir el título de cada episodio a mayúsculas
+                .peek(e -> System.out.println("Título en mayúsculas: " + e)) // Mostrar cada título después de la conversión
+                .limit(5) // Limitar el resultado a los 5 episodios mejor evaluados
+                .forEach(System.out::println); // Imprimir los episodios en la consola
 
         // Convirtiendo los datos a una lista del tipo Episodio
         List<Episodio> episodios = temporadas.stream()
@@ -78,7 +82,7 @@ public class Principal {
                         .map(d -> new Episodio(t.numero(), d)))  // Mapeo de DatosEpisodio a Episodio
                 .collect(Collectors.toList());
 
-        episodios.forEach(System.out::println);  // Imprime cada episodio en la consola
+//        episodios.forEach(System.out::println);  // Imprime cada episodio en la consola
 
         // Solicitar el año de búsqueda al usuario
         System.out.println("Por favor indique el año a partir del cual desea ver los episodios");
@@ -92,13 +96,13 @@ public class Principal {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         // Filtrar los episodios que fueron lanzados después de la fecha ingresada
-        episodios.stream()
-                .filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda)) // Filtrar por fecha
-                .forEach(e -> System.out.println( // Imprimir los episodios filtrados
-                        "Temporada " + e.getTemporada() + // Mostrar la temporada
-                                " Episodio " + e.getTitulo() + // Mostrar el título del episodio
-                                " Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf) // Mostrar la fecha formateada
-                ));
+//        episodios.stream()
+//                .filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda)) // Filtrar por fecha
+//                .forEach(e -> System.out.println( // Imprimir los episodios filtrados
+//                        "Temporada " + e.getTemporada() + // Mostrar la temporada
+//                                " Episodio " + e.getTitulo() + // Mostrar el título del episodio
+//                                " Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf) // Mostrar la fecha formateada
+//                ));
 
     }
 }
