@@ -122,5 +122,16 @@ public class Principal {
             System.out.println("Episodio no encontrado"); // Mensaje en caso de que no haya coincidencias
         }
 
+        // Filtrar episodios que tengan una evaluación válida (mayor a 0.0) y agrupar por temporada
+        Map<Integer, Double> evaluacionesPorTemporada = episodios.stream()
+                .filter(e -> e.getEvaluacion() > 0.0) // Solo considerar episodios con evaluación mayor a 0
+                .collect(Collectors.groupingBy(Episodio::getTemporada, // Agrupar los episodios por número de temporada
+                        Collectors.averagingDouble(Episodio::getEvaluacion) // Calcular el promedio de evaluación para cada temporada
+                ));
+
+        // Imprimir el mapa con el promedio de evaluaciones por temporada
+        System.out.println(evaluacionesPorTemporada);
+
+
     }
 }
