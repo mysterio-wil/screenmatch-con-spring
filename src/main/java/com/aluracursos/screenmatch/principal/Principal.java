@@ -132,6 +132,17 @@ public class Principal {
         // Imprimir el mapa con el promedio de evaluaciones por temporada
         System.out.println(evaluacionesPorTemporada);
 
+        // Crear estadísticas resumen de las evaluaciones de episodios con evaluación mayor a 0.0
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getEvaluacion() > 0.0) // Filtrar episodios con evaluación válida
+                .collect(Collectors.summarizingDouble(Episodio::getEvaluacion)); // Recopilar estadísticas de evaluaciones
+
+// Imprimir estadísticas clave de las evaluaciones
+        System.out.println("Media de las evaluaciones: " + est.getAverage()); // Promedio de todas las evaluaciones
+        System.out.println("Episodio mejor evaluado: " + est.getMax()); // Evaluación máxima entre episodios
+        System.out.println("Episodio peor evaluado: " + est.getMin()); // Evaluación mínima entre episodios
+        System.out.println("Cantidad de episodios evaluados: " + est.getCount()); // Total de episodios evaluados
+
 
     }
 }
