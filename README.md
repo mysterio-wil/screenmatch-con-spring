@@ -1,3 +1,5 @@
+# Curso de Java Web: crea aplicaciones utilizando Spring Boot
+
 # Aula 01
 
 ## En esta aula, has aprendido sobre:
@@ -40,3 +42,18 @@
 - Uso de Contenedores para Datos: Examinamos cómo usar el contenedor Optional para almacenar un episodio dentro de un Stream y evitar referencias nulas.
 - Filtrado de Datos: Aprendimos la importancia de filtrar datos adecuados para análisis y cómo esto puede afectar los resultados.
 - Uso de DoubleSummaryStatistics: Aprendimos cómo la clase DoubleSummaryStatistics de Java puede ayudar a analizar información, como la calificación más alta, la más baja y la cantidad de evaluaciones en nuestras series.
+
+
+# Curso de Java: persistencia de datos y consultas con Spring Data JPA
+
+# Aula 01
+
+## Lo que aprendimos en esta aula:
+
+- Buscar varias series en la API. Creamos un bucle que solo se detiene cuando el usuario elige salir del menú, permitiéndote buscar varias series en la API sin detenerte.
+- Métodos privados. Vimos que si solo una clase accederá a un método, no es necesario hacerlo público; podemos declararlo como privado. Esto es esencial para el encapsulamiento de nuestras clases.
+- Agregar más información a los datos buscados. Revisamos cómo realizar el mapeo entre atributos de la API y atributos de nuestro registro.
+- Convertir los datos que provienen de la API a tu propia clase. Creamos nuestra propia clase Serie para representar mejor nuestros datos. Para esto, fue necesario utilizar varios métodos de conversión.
+- Utilizar un "if reducido". Utilizamos la clase “OptionalDouble” para manejar valores decimales y sus posibles errores, utilizando los métodos “of” y “orElse”, que se asemejan mucho al código de un if reducido y son muy útiles para evitar que ocurran excepciones.
+- Crear un Enum. Nos dimos cuenta de que sería excelente poder categorizar nuestras series por género. Creamos un enum para esto y vimos cómo crear métodos personalizados en enums.
+- Consumir la API de ChatGPT. Utilizamos la API de ChatGPT para traducir nuestros datos, agregamos todas las dependencias necesarias y configuramos la clase de consumo.
