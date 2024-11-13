@@ -43,7 +43,6 @@
 - Filtrado de Datos: Aprendimos la importancia de filtrar datos adecuados para análisis y cómo esto puede afectar los resultados.
 - Uso de DoubleSummaryStatistics: Aprendimos cómo la clase DoubleSummaryStatistics de Java puede ayudar a analizar información, como la calificación más alta, la más baja y la cantidad de evaluaciones en nuestras series.
 
-
 # Curso de Java: persistencia de datos y consultas con Spring Data JPA
 
 # Aula 01
@@ -57,3 +56,14 @@
 - Utilizar un "if reducido". Utilizamos la clase “OptionalDouble” para manejar valores decimales y sus posibles errores, utilizando los métodos “of” y “orElse”, que se asemejan mucho al código de un if reducido y son muy útiles para evitar que ocurran excepciones.
 - Crear un Enum. Nos dimos cuenta de que sería excelente poder categorizar nuestras series por género. Creamos un enum para esto y vimos cómo crear métodos personalizados en enums.
 - Consumir la API de ChatGPT. Utilizamos la API de ChatGPT para traducir nuestros datos, agregamos todas las dependencias necesarias y configuramos la clase de consumo.
+
+# Aula 02
+
+## Lo que aprendimos en esta aula:
+
+- Configurar tu entorno de Postgres. Realizamos la instalación de esta base de datos relacional y observamos la diferencia entre bases de datos relacionales y otros tipos de bases de datos, además de crear nuestra base de datos de series en Postgres.
+- Preparar tu aplicación para trabajar con bases de datos. Agregamos la dependencia de JPA al pom.xml y las configuraciones de la base de datos en el archivo application.properties.
+- Utilizar anotaciones de Hibernate para mapear tus entidades. Utilizamos anotaciones como @Entity, @Transient y @Column en la clase Serie, indicando cómo serían las configuraciones de la tabla correspondiente en la base de datos.
+- Manipular interfaces del tipo Repository. Para realizar operaciones básicas en la base de datos, como un CRUD, necesitamos una interfaz del tipo Repository con nuestro tipo de datos. En nuestro caso, creamos la clase “SerieRepository”.
+- Inyectar dependencias. Observamos que no podemos instanciar una interfaz del tipo Repository en cualquier lugar. Deben declararse en clases gestionadas por Spring, precedidas de un @Autowired, indicando que se está realizando una inyección de dependencias.
+- Trabajar con variables de entorno. Utilizamos variables de entorno para proteger datos sensibles de la conexión con la base de datos y con la API.
