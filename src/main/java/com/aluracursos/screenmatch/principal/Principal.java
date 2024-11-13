@@ -105,10 +105,8 @@ public class Principal {
 
     // Método para mostrar todas las series buscadas hasta el momento
     private void mostrarSeriesBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = datosSeries.stream()
-                .map(d -> new Serie(d))
-                .collect(Collectors.toList());
+        // Obtiene todas las series desde el repositorio para mostrarlas en orden
+        List<Serie> series = repositorio.findAll();
 
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
