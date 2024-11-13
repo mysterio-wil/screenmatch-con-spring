@@ -3,6 +3,7 @@ package com.aluracursos.screenmatch.principal;
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
 import com.aluracursos.screenmatch.model.Serie;
+import com.aluracursos.screenmatch.repository.SerieRepository;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 
@@ -21,6 +22,13 @@ public class Principal {
     private ConvierteDatos conversor = new ConvierteDatos();
     // Lista para almacenar los datos de las series buscadas
     private List<DatosSerie> datosSeries = new ArrayList<>();
+    // Repositorio para gestionar la persistencia de Series en la base de datos
+    private SerieRepository repositorio;
+
+    // Constructor que inicializa el repositorio de series
+    public Principal(SerieRepository repository) {
+        this.repositorio = repository;
+    }
 
     // Método para mostrar el menú y buscar la serie
     public void muestraElMenu() {
@@ -88,7 +96,10 @@ public class Principal {
     // Método para buscar una serie en la web y almacenarla en la lista
     private void buscarSeriesWeb() {
         DatosSerie datos = getDatosSerie();
-        datosSeries.add(datos);
+        // Crea una instancia de Serie a partir de los datos obtenidos y la guarda en la base de datos
+        Serie serie = new Serie(datos);
+        repositorio.save(serie);
+        // datosSeries.add(datos); // Ya no se usa, ahora se persiste directamente
         System.out.println(datos);
     }
 
