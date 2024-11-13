@@ -3,6 +3,7 @@ package com.aluracursos.screenmatch.model;
 import com.aluracursos.screenmatch.service.ConsultaChatGPT;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.OptionalDouble;
 
 @Entity
@@ -20,6 +21,9 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
+    // Lista transitoria de episodios para la serie, no persistida en la base de datos
+    @Transient
+    private List<Episodio> episodios;
 
     public Serie(DatosSerie datosSerie) {
         this.titulo = datosSerie.titulo();
@@ -44,12 +48,12 @@ public class Serie {
     public String toString() {
         return
                 "titulo='" + titulo + '\'' +
-                ", totalDeTemporadas=" + totalDeTemporadas +
-                ", evaluacion=" + evaluacion +
-                ", poster='" + poster + '\'' +
-                ", genero=" + genero +
-                ", actores='" + actores + '\'' +
-                ", sinopsis='" + sinopsis + '\'';
+                        ", totalDeTemporadas=" + totalDeTemporadas +
+                        ", evaluacion=" + evaluacion +
+                        ", poster='" + poster + '\'' +
+                        ", genero=" + genero +
+                        ", actores='" + actores + '\'' +
+                        ", sinopsis='" + sinopsis + '\'';
     }
 
     public String getTitulo() {
