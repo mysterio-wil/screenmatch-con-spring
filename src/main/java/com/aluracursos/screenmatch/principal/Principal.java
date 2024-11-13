@@ -2,6 +2,7 @@ package com.aluracursos.screenmatch.principal;
 
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
+import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.model.Serie;
 import com.aluracursos.screenmatch.repository.SerieRepository;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
@@ -24,6 +25,7 @@ public class Principal {
     private List<DatosSerie> datosSeries = new ArrayList<>();
     // Repositorio para gestionar la persistencia de Series en la base de datos
     private SerieRepository repositorio;
+    private List<Serie> series;
 
     // Constructor que inicializa el repositorio de series
     public Principal(SerieRepository repository) {
@@ -80,17 +82,37 @@ public class Principal {
 
     // Método para buscar y mostrar los episodios de una serie específica
     private void buscarEpisodioPorSerie() {
-        DatosSerie datosSerie = getDatosSerie();
-        List<DatosTemporadas> temporadas = new ArrayList<>();
+        mostrarSeriesBuscadas();
+        System.out.println("Escriba el nombre de la serie para ver sus episodios:");
+        System.out.print(">>> ");
+        var nombreSerie = teclado.nextLine();
 
-        // Itera a través de las temporadas de la serie
-        for (int i = 1; i <= datosSerie.totalDeTemporadas(); i++) {
-            var json = consumoApi.obtenerDatos(URL_BASE + datosSerie.titulo().replace(" ", "+") + "&Season=" + i + API_KEY);
-            DatosTemporadas datosTemporadas = conversor.obtenerDatos(json, DatosTemporadas.class);
-            temporadas.add(datosTemporadas);
+        Optional<Serie> serie = series.stream()
+                .filter(s -> s.getTitulo().toLowerCase().contains(nombreSerie.toLowerCase()))
+                .findFirst();
+
+        if (serie.isPresent()) {
+            var serieEncontrada = serie.get();
+            List<DatosTemporadas> temporadas = new ArrayList<>();
+
+            // Itera a través de las temporadas de la serie
+            for (int i = 1; i <= serieEncontrada.getTotalDeTemporadas(); i++) {
+                var json = consumoApi.obtenerDatos(URL_BASE + serieEncontrada.getTitulo().replace(" ", "+") + "&Season=" + i + API_KEY);
+                DatosTemporadas datosTemporadas = conversor.obtenerDatos(json, DatosTemporadas.class);
+                temporadas.add(datosTemporadas);
+            }
+            // Muestra cada temporada obtenida
+            temporadas.forEach(System.out::println);
+
+            List<Episodio> episodios = temporadas.stream()
+                    .flatMap(d -> d.episodios().stream()
+                            .map(e -> new Episodio(d.numero(), e)))
+                    .collect(Collectors.toList());
+
+            serieEncontrada.setEpisodios(episodios);
+            repositorio.save(serieEncontrada);
+
         }
-        // Muestra cada temporada obtenida
-        temporadas.forEach(System.out::println);
     }
 
     // Método para buscar una serie en la web y almacenarla en la lista
@@ -106,7 +128,7 @@ public class Principal {
     // Método para mostrar todas las series buscadas hasta el momento
     private void mostrarSeriesBuscadas() {
         // Obtiene todas las series desde el repositorio para mostrarlas en orden
-        List<Serie> series = repositorio.findAll();
+        series = repositorio.findAll();
 
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
