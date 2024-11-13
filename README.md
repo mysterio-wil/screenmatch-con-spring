@@ -67,3 +67,14 @@
 - Manipular interfaces del tipo Repository. Para realizar operaciones básicas en la base de datos, como un CRUD, necesitamos una interfaz del tipo Repository con nuestro tipo de datos. En nuestro caso, creamos la clase “SerieRepository”.
 - Inyectar dependencias. Observamos que no podemos instanciar una interfaz del tipo Repository en cualquier lugar. Deben declararse en clases gestionadas por Spring, precedidas de un @Autowired, indicando que se está realizando una inyección de dependencias.
 - Trabajar con variables de entorno. Utilizamos variables de entorno para proteger datos sensibles de la conexión con la base de datos y con la API.
+
+# Aula 03
+
+## Lo que aprendimos en esta aula:
+
+- Mapear relaciones entre entidades de JPA. Aprendimos el uso de las anotaciones @OneToMany y @ManyToOne para identificar la relación "uno a muchos" entre series y episodios.
+- Conocer diversos tipos de relación: Identificamos cuál era la relación presente en nuestra aplicación, además de tener conocimiento de los varios tipos de relaciones en bases de datos.
+- Asociar claves foráneas: Entendimos el concepto de clave foránea, que es cómo la base de datos identifica y configura relaciones entre diferentes tablas.
+- Trabajar con los tipos de Cascade: Dado que nuestro flujo de guardado de datos implicaba guardar series y luego episodios, fue necesario configurar esto utilizando el atributo Cascade.
+- Identificar cómo se cargan los datos: También trabajamos con el atributo fetch, que trata sobre cargar los datos de manera "perezosa" (lazy) o "ansiosa" (eager).
+- Configurar relaciones bidireccionales: Vimos la importancia de las relaciones bidireccionales y permitimos que las modificaciones aparezcan en ambos lados de la relación, haciendo tanto setEpisodios() en Serie como setSerie() en Episodios.
