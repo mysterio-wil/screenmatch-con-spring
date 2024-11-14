@@ -15,4 +15,7 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     List<Serie> findTop5ByOrderByEvaluacionDesc();
 
     List<Serie> findByGenero(Categoria categoria);
+
+    // Método personalizado para buscar series por número de temporadas y evaluación
+    List<Serie> findByTotalDeTemporadasAndEvaluacion(Double totalDeTemporadas, Double evaluacion);
 }
