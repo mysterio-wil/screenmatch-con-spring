@@ -78,3 +78,13 @@
 - Trabajar con los tipos de Cascade: Dado que nuestro flujo de guardado de datos implicaba guardar series y luego episodios, fue necesario configurar esto utilizando el atributo Cascade.
 - Identificar cómo se cargan los datos: También trabajamos con el atributo fetch, que trata sobre cargar los datos de manera "perezosa" (lazy) o "ansiosa" (eager).
 - Configurar relaciones bidireccionales: Vimos la importancia de las relaciones bidireccionales y permitimos que las modificaciones aparezcan en ambos lados de la relación, haciendo tanto setEpisodios() en Serie como setSerie() en Episodios.
+
+# Aula 04 
+
+## Lo que aprendimos en esta aula:
+
+- Crear consultas derivadas con JPA. Conocimos el recurso estándar de JPA para realizar búsquedas utilizando palabras clave en los métodos de la clase Repository.
+- Comparar streams y búsquedas en la base de datos. Observamos los cambios al usar streams y las derived queries en nuestra aplicación.
+- Conocer diversas palabras clave para crear sus métodos. Profundizamos en las palabras clave y en cómo usarlas, reforzando la práctica.
+- Discutir los varios tipos de retorno al realizar las búsquedas. Conversamos sobre las diferencias entre devolver una serie, una lista de series o un Optional de series.
+- Leer datos dinámicamente y almacenar en un Enum. Vimos cómo hacer coincidir lo que se está escribiendo con un campo en el enum.
