@@ -178,22 +178,34 @@ public class Principal {
 
     // Método para buscar series por número de temporadas y evaluación
     private void buscarSeriesPorTemporadasYEvaluacion() {
-        System.out.println("Escribe el número de temporadas que deseas buscar:");
+        System.out.println("Ingrese el número máximo de temporadas de la serie:");
         System.out.print(">>> ");
-        var numeroTemporadas = teclado.nextInt();
+        var totalDeTemporadas = teclado.nextInt();
+        teclado.nextLine();
 
-        System.out.println("Escribe la evaluación mínima que deseas buscar:");
+        System.out.println("Ingrese la evaluación mínima (entre 0 y 10):");
         System.out.print(">>> ");
         var evaluacion = teclado.nextDouble();
+        teclado.nextLine();
+
+        // Validación de la evaluación mínima
+        if (evaluacion < 0 || evaluacion > 10) {
+            System.out.println("Error: La evaluación debe estar entre 0 y 10.");
+            return;
+        }
 
         // Busca las series en el repositorio utilizando los filtros
-        List<Serie> seriesEncontradas = repositorio.findByTotalDeTemporadasAndEvaluacion((double) numeroTemporadas, evaluacion);
+        List<Serie> seriesEncontradas = repositorio.findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalDeTemporadas, evaluacion);
 
         // Muestra las series encontradas
         if (seriesEncontradas.isEmpty()) {
             System.out.println("No se encontraron series con esos criterios.");
         } else {
-            seriesEncontradas.forEach(System.out::println);
+            System.out.println("*** Series filtradas ***");
+            seriesEncontradas.forEach(s ->
+                    System.out.println("Título: " + s.getTitulo() +
+                            " - Temporadas: " + s.getTotalDeTemporadas() +
+                            " - Evaluación: " + s.getEvaluacion()));
         }
     }
 }
