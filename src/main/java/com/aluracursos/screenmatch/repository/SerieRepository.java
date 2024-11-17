@@ -3,6 +3,7 @@ package com.aluracursos.screenmatch.repository;
 import com.aluracursos.screenmatch.model.Categoria;
 import com.aluracursos.screenmatch.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,8 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 
     // Método de búsqueda en el repositorio que filtra las series con un número de temporadas menor o igual al especificado
     // y una evaluación mayor o igual al valor dado.
-    List<Serie> findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(int totalDeTemporadas, Double evaluacion);
+    // List<Serie> findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(int totalDeTemporadas, Double evaluacion);
+
+    @Query(value = "SELECT * FROM series WHERE series.total_de_temporadas <= 6 AND series.evaluacion >= 7.5", nativeQuery = true)
+    List<Serie> seresPorTemporadaYEvaluacion();
 }
