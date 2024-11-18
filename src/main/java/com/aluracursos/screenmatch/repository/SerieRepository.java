@@ -1,6 +1,7 @@
 package com.aluracursos.screenmatch.repository;
 
 import com.aluracursos.screenmatch.model.Categoria;
+import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +22,6 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     // y una evaluación mayor o igual al valor dado.
     // List<Serie> findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(int totalDeTemporadas, Double evaluacion);
 
-    @Query(value = "SELECT * FROM series WHERE series.total_de_temporadas <= 6 AND series.evaluacion >= 7.5", nativeQuery = true)
-    List<Serie> seresPorTemporadaYEvaluacion();
+    @Query("SELECT s FROM Serie s WHERE s.totalDeTemporadas <= :totalDeTemporadas AND s.evaluacion >= :evaluacion")
+    List<Serie> seresPorTemporadaYEvaluacion(int totalDeTemporadas, Double evaluacion);
 }
