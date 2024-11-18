@@ -196,7 +196,7 @@ public class Principal {
 
         // Busca las series en el repositorio utilizando los filtros
         // List<Serie> seriesEncontradas = repositorio.findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalDeTemporadas, evaluacion);
-        List<Serie> seriesEncontradas = repositorio.seresPorTemporadaYEvaluacion();
+        List<Serie> seriesEncontradas = repositorio.seresPorTemporadaYEvaluacion(totalDeTemporadas, evaluacion);
 
         // Muestra las series encontradas
         if (seriesEncontradas.isEmpty()) {
