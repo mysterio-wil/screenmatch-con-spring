@@ -5,3 +5,4 @@
 
 ### Changed
 - Se refactorizó la clase `ScreenmatchApplication` para mejorar la modularidad y la estructura del proyecto.
+- Integración del repositorio SerieRepository en el endpoint GET /series para obtener las series de la base de datos.
