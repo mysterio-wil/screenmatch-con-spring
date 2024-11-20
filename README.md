@@ -1,100 +1,94 @@
-# Curso de Java Web: crea aplicaciones utilizando Spring Boot
+# Documentación de la V1 de la Aplicación Screenmatch
 
-# Aula 01
+## Descripción del Proyecto
 
-## En esta aula, has aprendido sobre:
+Screenmatch es una aplicación para gestionar una base de datos de series, donde los usuarios pueden buscar series por título, género y otros criterios. La aplicación utiliza Spring Boot y PostgreSQL para manejar la persistencia de datos, y tiene integraciones con OpenAI para traducción automática de textos.
 
-- Estructura de un Proyecto Spring: Observamos la estructura inicial de un proyecto Spring y discutimos sobre los paquetes, clases y el método run.
-- Inferencia de Tipos en Java: Vimos un ejemplo práctico de inferencia de tipos con 'var' en el código Java.
-- Consumo de API: Aprendimos a consumir APIs a través del método 'obtenerDatos', que devuelve los datos deseados en formato Json.
-- Modularización de Código: Aprendimos la importancia de tener un código modularizado y de fácil mantenimiento.
-- Serialización y Deserialización: Aprendimos cómo transformar JSON en clases y cómo esto es útil para el proyecto.
-- Creación de Interfaces e Implementación de Métodos: Se demostró la creación de una interfaz con un método genérico que utiliza Generics, así como la implementación de este método en una clase separada.
-- Inclusión de Nuevas Dependencias en el Proyecto: Vimos cómo agregar una nueva dependencia al archivo .pom.xml y cómo este proceso es gestionado por Maven.
+## Funcionalidades
 
-# Aula 02
+### 1. Gestión de Series
+- **CRUD de Series**: Permite realizar operaciones CRUD sobre las series almacenadas en la base de datos.
+- **Buscar Series**: Las series pueden ser buscadas por su título, género o evaluación.
+- **Episodios**: Cada serie tiene una lista de episodios, que se pueden consultar individualmente.
 
-## En esta aula, has aprendido sobre:
+### 2. Consultas Específicas
+- Buscar series por número de temporadas y evaluación.
+- Obtener las mejores series según su evaluación.
+- Buscar episodios por nombre de manera parcial.
 
-- APIs y Consultas Detalladas: Descubrimos cómo trabajar con APIs para obtener información detallada y realizar consultas más específicas.
-- Uso de Anotaciones @JsonAlias y @JsonIgnoreProperties: Exploramos la importancia de utilizar estas funciones para mapear la API a la aplicación.
-- Creación de Métodos para Interacción con el Usuario: Creamos un método para mostrar el menú e interactuar con el usuario, permitiéndoles ingresar el nombre de la serie que desean buscar.
-- Manipulación de Datos de una API: Mostramos cómo importar y manipular datos de una API, en este caso, datos de series de televisión.
-- Manipulación de Cadenas para Acceder a una API: Observamos cómo manipular cadenas para crear direcciones que la API entenderá y devolverá los datos deseados.
-- Introducción a los Lambdas: Conocimos las Expresiones Lambda en Java, también conocidas como funciones anónimas que podemos usar para escribir código más eficiente.
+### 3. Traducción Automática
+- **Integración con OpenAI**: La aplicación incluye una funcionalidad que utiliza la API de OpenAI para traducir textos al español automáticamente.
 
-# Aula 03
+## Estructura del Proyecto
 
-## En esta aula, has aprendido sobre:
+La aplicación está organizada en varias capas:
 
-- Introducción a las Funciones Lambda: Hemos aprendido la sintaxis de las funciones lambda en Java y cómo permiten una escritura más concisa.
-- Uso de Streams en Java: Obtuvimos una comprensión esencial de los streams, que son flujos de datos en Java, y cómo realizar operaciones encadenadas en ellos.
-- Filtrado de Datos: Aprendimos cómo usar la funcionalidad de filtrado en streams para seleccionar solo datos específicos, en este caso, episodios de series de televisión con una calificación específica.
-- Manipulación de Fechas: Exploramos cómo convertir cadenas en LocalDates y cómo manejar posibles excepciones que pueden ocurrir en este proceso.
-- Manejo de Excepciones: Realizamos el manejo de excepciones específicas, como NumberFormatException y DateTimeParseException, que pueden ocurrir debido a la conversión de datos.
+1. **Controlador (`Controller`)**: Gestiona las solicitudes HTTP de los usuarios.
+2. **Servicio (`Service`)**: Contiene la lógica de negocio, como la gestión de series y episodios.
+3. **Repositorio (`Repository`)**: Realiza las operaciones CRUD sobre la base de datos utilizando Spring Data JPA.
+4. **Modelo (`Model`)**: Define las entidades `Serie` y `Episodio`.
 
-# Aula 04
+## Componentes Principales
 
-## En esta aula, has aprendido sobre:
+### 1. `ScreenmatchApplication.java`
+Es la clase principal de la aplicación que arranca el servidor Spring Boot. Esta clase implementa `CommandLineRunner`, lo que permite ejecutar código al inicio de la aplicación.
 
-- Uso de la función peek: Se introdujo la función peek en Java, que permite visualizar lo que está sucediendo en cada etapa del Stream, facilitando el proceso de depuración.
-- Operaciones Intermedias y Finales: Aprendimos sobre la utilización de operaciones (como map, filter y find) que nos permiten manipular y encontrar datos dentro de un Stream.
-- Uso de Contenedores para Datos: Examinamos cómo usar el contenedor Optional para almacenar un episodio dentro de un Stream y evitar referencias nulas.
-- Filtrado de Datos: Aprendimos la importancia de filtrar datos adecuados para análisis y cómo esto puede afectar los resultados.
-- Uso de DoubleSummaryStatistics: Aprendimos cómo la clase DoubleSummaryStatistics de Java puede ayudar a analizar información, como la calificación más alta, la más baja y la cantidad de evaluaciones en nuestras series.
+### 2. `SerieRepository.java`
+Repositorio que extiende de `JpaRepository` para acceder a las series en la base de datos. Permite realizar búsquedas personalizadas usando JPQL, como encontrar series por título o género.
 
-# Curso de Java: persistencia de datos y consultas con Spring Data JPA
+### 3. `ConsultaChatGPT.java`
+Servicio que interactúa con la API de OpenAI para realizar traducciones automáticas de texto.
 
-# Aula 01
+### 4. `ConsumoAPI.java`
+Clase encargada de realizar peticiones HTTP a APIs externas y obtener los datos en formato JSON.
 
-## Lo que aprendimos en esta aula:
+### 5. `ConvierteDatos.java`
+Servicio que convierte datos en formato JSON a objetos Java utilizando Jackson.
 
-- Buscar varias series en la API. Creamos un bucle que solo se detiene cuando el usuario elige salir del menú, permitiéndote buscar varias series en la API sin detenerte.
-- Métodos privados. Vimos que si solo una clase accederá a un método, no es necesario hacerlo público; podemos declararlo como privado. Esto es esencial para el encapsulamiento de nuestras clases.
-- Agregar más información a los datos buscados. Revisamos cómo realizar el mapeo entre atributos de la API y atributos de nuestro registro.
-- Convertir los datos que provienen de la API a tu propia clase. Creamos nuestra propia clase Serie para representar mejor nuestros datos. Para esto, fue necesario utilizar varios métodos de conversión.
-- Utilizar un "if reducido". Utilizamos la clase “OptionalDouble” para manejar valores decimales y sus posibles errores, utilizando los métodos “of” y “orElse”, que se asemejan mucho al código de un if reducido y son muy útiles para evitar que ocurran excepciones.
-- Crear un Enum. Nos dimos cuenta de que sería excelente poder categorizar nuestras series por género. Creamos un enum para esto y vimos cómo crear métodos personalizados en enums.
-- Consumir la API de ChatGPT. Utilizamos la API de ChatGPT para traducir nuestros datos, agregamos todas las dependencias necesarias y configuramos la clase de consumo.
+### 6. `application.properties`
+Configuración de la base de datos (PostgreSQL) y de Hibernate. Incluye la configuración de las credenciales de la base de datos y los parámetros para mostrar las consultas SQL en consola.
 
-# Aula 02
+### 7. `pom.xml`
+Gestiona las dependencias del proyecto, incluyendo Spring Boot, JPA, PostgreSQL, Jackson, y la integración con la API de OpenAI.
 
-## Lo que aprendimos en esta aula:
+## Dependencias Utilizadas
 
-- Configurar tu entorno de Postgres. Realizamos la instalación de esta base de datos relacional y observamos la diferencia entre bases de datos relacionales y otros tipos de bases de datos, además de crear nuestra base de datos de series en Postgres.
-- Preparar tu aplicación para trabajar con bases de datos. Agregamos la dependencia de JPA al pom.xml y las configuraciones de la base de datos en el archivo application.properties.
-- Utilizar anotaciones de Hibernate para mapear tus entidades. Utilizamos anotaciones como @Entity, @Transient y @Column en la clase Serie, indicando cómo serían las configuraciones de la tabla correspondiente en la base de datos.
-- Manipular interfaces del tipo Repository. Para realizar operaciones básicas en la base de datos, como un CRUD, necesitamos una interfaz del tipo Repository con nuestro tipo de datos. En nuestro caso, creamos la clase “SerieRepository”.
-- Inyectar dependencias. Observamos que no podemos instanciar una interfaz del tipo Repository en cualquier lugar. Deben declararse en clases gestionadas por Spring, precedidas de un @Autowired, indicando que se está realizando una inyección de dependencias.
-- Trabajar con variables de entorno. Utilizamos variables de entorno para proteger datos sensibles de la conexión con la base de datos y con la API.
+- **Spring Boot**: Framework para la construcción de aplicaciones web.
+- **Spring Data JPA**: Implementación de JPA para manejar la persistencia de datos.
+- **PostgreSQL**: Base de datos relacional utilizada para almacenar las series y episodios.
+- **OpenAI GPT-3**: API utilizada para realizar traducciones automáticas de texto.
+- **Jackson**: Librería para convertir objetos Java a JSON y viceversa.
 
-# Aula 03
+## Configuración de la Base de Datos
 
-## Lo que aprendimos en esta aula:
+La aplicación utiliza PostgreSQL como sistema de gestión de base de datos. La configuración de la base de datos se realiza a través de las propiedades en `application.properties`:
 
-- Mapear relaciones entre entidades de JPA. Aprendimos el uso de las anotaciones @OneToMany y @ManyToOne para identificar la relación "uno a muchos" entre series y episodios.
-- Conocer diversos tipos de relación: Identificamos cuál era la relación presente en nuestra aplicación, además de tener conocimiento de los varios tipos de relaciones en bases de datos.
-- Asociar claves foráneas: Entendimos el concepto de clave foránea, que es cómo la base de datos identifica y configura relaciones entre diferentes tablas.
-- Trabajar con los tipos de Cascade: Dado que nuestro flujo de guardado de datos implicaba guardar series y luego episodios, fue necesario configurar esto utilizando el atributo Cascade.
-- Identificar cómo se cargan los datos: También trabajamos con el atributo fetch, que trata sobre cargar los datos de manera "perezosa" (lazy) o "ansiosa" (eager).
-- Configurar relaciones bidireccionales: Vimos la importancia de las relaciones bidireccionales y permitimos que las modificaciones aparezcan en ambos lados de la relación, haciendo tanto setEpisodios() en Serie como setSerie() en Episodios.
+```properties
+spring.datasource.url=jdbc:postgresql://${DB_HOST}/${DB_NAME}
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+hibernate.dialect=org.hibernate.dialect.HSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.format-sql=true
+```
 
-# Aula 04 
+## Ejecución de la Aplicación
 
-## Lo que aprendimos en esta aula:
+Para ejecutar la aplicación, sigue los siguientes pasos:
 
-- Crear consultas derivadas con JPA. Conocimos el recurso estándar de JPA para realizar búsquedas utilizando palabras clave en los métodos de la clase Repository.
-- Comparar streams y búsquedas en la base de datos. Observamos los cambios al usar streams y las derived queries en nuestra aplicación.
-- Conocer diversas palabras clave para crear sus métodos. Profundizamos en las palabras clave y en cómo usarlas, reforzando la práctica.
-- Discutir los varios tipos de retorno al realizar las búsquedas. Conversamos sobre las diferencias entre devolver una serie, una lista de series o un Optional de series.
-- Leer datos dinámicamente y almacenar en un Enum. Vimos cómo hacer coincidir lo que se está escribiendo con un campo en el enum.
+1. Asegúrate de tener PostgreSQL instalado y configurado.
+2. Configura las variables de entorno `DB_HOST`, `DB_NAME`, `DB_USER` y `DB_PASSWORD`.
+3. Compila y ejecuta la aplicación utilizando Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
 
-# Aula 05
+## Pruebas
 
-## Lo que aprendimos en esta aula:
+Las pruebas están implementadas utilizando el framework de pruebas de Spring Boot. Se incluyen pruebas unitarias para las funcionalidades clave, como la gestión de series y la interacción con la API de OpenAI.
 
-- Diferenciar los tipos de consultas de JPA. Vimos que podemos trabajar con consultas derivadas, con consultas nativas usando nativequery y JPQL, que es el lenguaje de búsqueda de JPA.
-- Crear métodos totalmente personalizados y más legibles. Observamos que utilizar JPQL puede ayudar en la escritura de métodos más legibles. Para ello, basta con escribir el nombre del método y anotarlo con @Query.
-- rofundizar en el lenguaje SQL. Conocimos varias expresiones utilizadas en SQL, como LIKE, ORDER y LIMIT.
-- Recuperar información secundaria. Pudimos buscar información relacionada con episodios a partir de la serie, utilizando la función de uniones (JOIN).
-- Comparar recursos SQL y Java. Nos dimos cuenta de que, al igual que Java tiene una API de fechas, SQL también tiene su forma de manejar las fechas. En nuestro caso, utilizamos la función YEAR de SQL.
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.
