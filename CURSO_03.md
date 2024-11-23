@@ -24,3 +24,11 @@
 - **Utilizar buenas prácticas de extracción de métodos**. Aplicamos principios de la orientación a objetos, extrayendo métodos que eran comunes en el código, facilitando el mantenimiento.
 - **Crear una url fija para el Controller**. Usamos el @RequestMapping para que todas las urls mapeadas por el controlador de series tengan como prefijo el “/series”.
 - **Retornar los datos de una sola serie**. Para buscar una serie, necesitamos que su id sea pasado como parámetro. Conocimos el @PathVariable, que nos ayuda en ese objetivo.
+
+# Aula 04
+
+## En esta clase, aprendiste cómo:
+- **Trabajar de forma colaborativa**. Vimos que es importante siempre probar exhaustivamente el código, más aún con registros diferentes. Solo así tenemos la confirmación de que nuestras búsquedas están correctas.
+- **Pasar parámetros en la url**. Usamos nuevamente la anotación @PathVariable y vimos que puede ser utilizada tanto con números como con cadenas. Para que funcione, basta con que pasemos el nombre del parámetro entre llaves en la url del @GetMapping, exactamente como está declarado en la función.
+- **Comparar streams y búsquedas en la base de datos**. Aprendimos que podemos utilizar tanto streams como consultas de la base de datos, no necesitamos restringirnos al uso exclusivo de uno de ellos. Basta con que analicemos la complejidad de las búsquedas, filtros y operaciones que haremos.
+- **Desarrollar una aplicación de forma incremental**. Al trabajar en la integración del front con el back-end, identificamos, a lo largo del tiempo, los requisitos necesarios para que todo funcione en conjunto. El trabajo incremental es muy común en el ambiente de desarrollo.
