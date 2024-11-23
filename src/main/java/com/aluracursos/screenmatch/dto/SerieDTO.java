@@ -5,6 +5,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 public record SerieDTO(
+        Long Id,
         String titulo,
         Integer totalDeTemporadas,
         Double evaluacion,
@@ -13,5 +14,4 @@ public record SerieDTO(
         String actores,
         String sinopsis
 ) {
-
 }
