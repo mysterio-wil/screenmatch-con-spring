@@ -13,6 +13,9 @@
 - Se añadió el endpoint `@GetMapping("/lanzamientos")` en `SerieController` para obtener las series con los lanzamientos más recientes, utilizando el método correspondiente de `SerieService`.
 - Se añadió el método `obtenerPorId(Long id)` en la clase `SerieService` para obtener los detalles de una serie específica por su ID. Si la serie no existe, retorna `null`.
 - Se añadió el endpoint `GET /series/{id}` en `SerieController` para exponer la funcionalidad de obtener los detalles de una serie específica, utilizando el método correspondiente de `SerieService`.
+- Se añadió en `SerieRepository` la query `obtenerTemporadasPorNumero` para obtener los episodios de una temporada específica de una serie, utilizando el ID de la serie y el número de temporada.
+- Se añadió en `SerieService` los métodos `obtenerTodasLasTemporadas` y `obtenerTemporadasPorNumero`.
+- Se añadió en `SerieController` los endpoints `GET /series/{id}/temporadas/todas` y `GET /series/{id}/temporadas/{numeroTemporada}`.
 
 ### **Changed**
 - Se refactorizó la clase `ScreenmatchApplication` para mejorar la modularidad y la estructura del proyecto.
