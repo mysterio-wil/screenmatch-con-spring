@@ -16,6 +16,9 @@
 - Se añadió en `SerieRepository` la query `obtenerTemporadasPorNumero` para obtener los episodios de una temporada específica de una serie, utilizando el ID de la serie y el número de temporada.
 - Se añadió en `SerieService` los métodos `obtenerTodasLasTemporadas` y `obtenerTemporadasPorNumero`.
 - Se añadió en `SerieController` los endpoints `GET /series/{id}/temporadas/todas` y `GET /series/{id}/temporadas/{numeroTemporada}`.
+- Se añadió el endpoint `GET /series/categoria/{nombreGenero}` en `SerieController` para obtener series filtradas por género.
+- Se añadió el método `obtenerSeriesPorCategoria` en `SerieService` para obtener series por género, utilizando el método `findByGenero` en `SerieRepository`.
+- El método `obtenerSeriesPorCategoria` convierte el nombre del género en español a su representación en la clase `Categoria` y devuelve una lista de `SerieDTO` correspondientes.
 
 ### **Changed**
 - Se refactorizó la clase `ScreenmatchApplication` para mejorar la modularidad y la estructura del proyecto.
