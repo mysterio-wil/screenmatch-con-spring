@@ -11,6 +11,8 @@
 - Se añadió la query `lanzamientosMasRecientes()` en `SerieRepository` para obtener las series con los lanzamientos más recientes, ordenadas por la fecha de lanzamiento de sus episodios.
 - Se añadió el método `obtenerLanzamientosMasRecientes()` en `SerieService` para obtener las series más recientes utilizando el repositorio.
 - Se añadió el endpoint `@GetMapping("/lanzamientos")` en `SerieController` para obtener las series con los lanzamientos más recientes, utilizando el método correspondiente de `SerieService`.
+- Se añadió el método `obtenerPorId(Long id)` en la clase `SerieService` para obtener los detalles de una serie específica por su ID. Si la serie no existe, retorna `null`.
+- Se añadió el endpoint `GET /series/{id}` en `SerieController` para exponer la funcionalidad de obtener los detalles de una serie específica, utilizando el método correspondiente de `SerieService`.
 
 ### **Changed**
 - Se refactorizó la clase `ScreenmatchApplication` para mejorar la modularidad y la estructura del proyecto.
