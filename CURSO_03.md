@@ -16,3 +16,11 @@
 - **Utilizar el patrón DTO**. Para evitar la serialización circular y principalmente para seguir buenas prácticas, creamos nuestros DTOs. Así, nuestros datos se volvieron más seguros y fueron devueltos de forma personalizada.
 - **Lidiar con el error de CORS**. Conocimos el error entre la comunicación entre rutas de orígenes diferentes y pudimos tratarlo, creando la clase CorsConfiguration.
 - **Configurar el Live Reload**. Para que la aplicación no necesite ser detenida y reiniciada siempre que haya cambios, usamos el Devtools y cambiamos las configuraciones necesarias en Intellij.
+
+# Aula 03
+
+## En esta clase, aprendiste cómo:
+- **Hacer el código más limpio y organizado**. Vimos que la única responsabilidad de un controlador es manejar la comunicación y las rutas de la API. Así, no debe contener reglas de negocio. Y para hacer esta división, creamos una clase de servicios, la SerieService.
+- **Utilizar buenas prácticas de extracción de métodos**. Aplicamos principios de la orientación a objetos, extrayendo métodos que eran comunes en el código, facilitando el mantenimiento.
+- **Crear una url fija para el Controller**. Usamos el @RequestMapping para que todas las urls mapeadas por el controlador de series tengan como prefijo el “/series”.
+- **Retornar los datos de una sola serie**. Para buscar una serie, necesitamos que su id sea pasado como parámetro. Conocimos el @PathVariable, que nos ayuda en ese objetivo.
