@@ -19,6 +19,14 @@
 - Se añadió el endpoint `GET /series/categoria/{nombreGenero}` en `SerieController` para obtener series filtradas por género.
 - Se añadió el método `obtenerSeriesPorCategoria` en `SerieService` para obtener series por género, utilizando el método `findByGenero` en `SerieRepository`.
 - El método `obtenerSeriesPorCategoria` convierte el nombre del género en español a su representación en la clase `Categoria` y devuelve una lista de `SerieDTO` correspondientes.
+- Se añadió el endpoint `GET /series/{id}/temporadas/top` en la clase `SerieController`.
+    - Este endpoint permite obtener los 5 episodios mejor evaluados de una serie específica mediante su ID.
+    - El método delega la lógica de negocio al método `obtenerTopEpisodios` en `SerieService`.
+- Se añadió el método `obtenerTopEpisodios(Long id)` en la clase `SerieService`.
+    - Este método obtiene los 5 episodios con la mejor evaluación de una serie dada.
+    - Utiliza la consulta personalizada `topEpisodiosPorSerie` definida en `SerieRepository`.
+- Se añadió la consulta personalizada `topEpisodiosPorSerie` en `SerieRepository`.
+    - La consulta utiliza un `JOIN` entre la serie y sus episodios para obtener los 5 episodios mejor evaluados de una serie específica.
 
 ### **Changed**
 - Se refactorizó la clase `ScreenmatchApplication` para mejorar la modularidad y la estructura del proyecto.
